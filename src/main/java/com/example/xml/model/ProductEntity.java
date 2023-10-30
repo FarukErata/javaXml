@@ -1,12 +1,14 @@
 package com.example.xml.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name="ÜrünXml")
+@Table(name="Xml")
 public class ProductEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,7 +16,7 @@ public class ProductEntity {
     private String name;
     @Column(name="marka")
     private String model;
-    @Column(name="ürünTip")
+    @Column(name="type")
     private String type;
     @Column(name="fiyat")
     private String price;
@@ -26,8 +28,7 @@ public class ProductEntity {
     }
 
 
-    public ProductEntity(int id, String name, String model, String type, String price, String date) {
-        this.id = id;
+    public ProductEntity(String name, String model, String type, String price, String date) {
         this.name = name;
         this.model = model;
         this.type = type;
