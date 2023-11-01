@@ -22,13 +22,15 @@ public class ProductController {
     @Autowired
     private ProductManager productManager;
 
-    public void xml(){
-        productManager.Read();
-    }
 
     @Autowired
     public ProductController(IProduct iProduct){
         this.iProduct=iProduct;
+    }
+
+    @GetMapping("/save")
+    private void save(){
+        this.iProduct.read();
     }
 
     @GetMapping("/getByName")
