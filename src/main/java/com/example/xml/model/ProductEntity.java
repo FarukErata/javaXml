@@ -13,16 +13,6 @@ public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @GeneratedValue(generator="sequence-generator")
-//    @GenericGenerator(
-//        name="sequence_generator",
-//        strategy = "org.hibernate.id.enchanced.SequenceStyleGenerator",
-//            parameters = {
-//                @Parameter(name = "sequence_name", value = "user_sequence"),
-//                @Parameter(name = "initial_value", value = "1"),
-//                @Parameter(name = "increment_size", value = "1"),
-//            }
-//    )
     private int id;
     @Column(name="ad")
     private String name;

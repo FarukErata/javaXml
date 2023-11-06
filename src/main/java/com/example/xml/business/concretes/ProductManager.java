@@ -36,36 +36,44 @@ public class ProductManager implements IProduct {
     @Override
     public void read(){
         try{
-            ProductEntity entity=new ProductEntity();
-            DatePrice dp= new DatePrice();
 
 
-            File file = new File("C:/Users/DELL/Desktop/productinfo/product1.xml");
-            //File file2 = new File("C:/Users/DELL/Desktop/productinfo/product2.xml");
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc=db.parse(file);
-            NodeList nodeList=doc.getElementsByTagName("test");
-            for(int i=0;i<nodeList.getLength();i++){
-                Node node=nodeList.item(i);
+            File directoryPath=new File("C:/Users/DELL/Desktop/productinfo/");
+            String contents[]=directoryPath.list();
+            for (String content : contents) {
+                ProductEntity entity=new ProductEntity();
+                DatePrice dp= new DatePrice();
+
+                File file = new File("C:/Users/DELL/Desktop/productinfo/" + content);
 
 
-                if(node.getNodeType()==Node.ELEMENT_NODE){
-                    Element tElement=(Element)node;
+                //File file = new File("C:/Users/DELL/Desktop/productinfo/");
+                //File file2 = new File("C:/Users/DELL/Desktop/productinfo/product2.xml");
 
-                    entity.setName(tElement.getElementsByTagName("ad").item(0).getTextContent());
-                    entity.setType(tElement.getElementsByTagName("tip").item(0).getTextContent());
-                    entity.setModel(tElement.getElementsByTagName("marka").item(0).getTextContent());
-                    entity.setPrice(tElement.getElementsByTagName("fiyat").item(0).getTextContent());
-                    entity.setDate(tElement.getElementsByTagName("tarih").item(0).getTextContent());
+                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                DocumentBuilder db = dbf.newDocumentBuilder();
+                Document doc = db.parse(file);
+                NodeList nodeList = doc.getElementsByTagName("test");
+                for (int i = 0; i < nodeList.getLength(); i++) {
+                    Node node = nodeList.item(i);
+
+
+                    if (node.getNodeType() == Node.ELEMENT_NODE) {
+                        Element tElement = (Element) node;
+
+                        entity.setName(tElement.getElementsByTagName("ad").item(0).getTextContent());
+                        entity.setType(tElement.getElementsByTagName("tip").item(0).getTextContent());
+                        entity.setModel(tElement.getElementsByTagName("marka").item(0).getTextContent());
+                        entity.setPrice(tElement.getElementsByTagName("fiyat").item(0).getTextContent());
+                        entity.setDate(tElement.getElementsByTagName("tarih").item(0).getTextContent());
+                    }
+
                 }
-
+                productDao.save(entity);
+                dp.setDate(entity.getDate());
+                dp.setPrice(entity.getPrice());
+                datePriceDao.save(dp);
             }
-            productDao.save(entity);
-            dp.setDate(entity.getDate());
-            dp.setPrice(entity.getPrice());
-            datePriceDao.save(dp);
-
         }catch(Exception e){
             System.out.println(e);
         }
@@ -74,16 +82,13 @@ public class ProductManager implements IProduct {
     }
 
 
-    @Override
-    public void xmlSave() {
-    }
 
     @Override
     public List<ProductEntity> findByName(String name){
-        return productDao.findAll();
+        return productDao.findByName(name);
     }
     @Override
-    public List<ProductEntity> find(String model){
-        return productDao.findAll();
+    public List<ProductEntity> findByModel(String model){
+        return productDao.findByModel(model);
     }
 }

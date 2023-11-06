@@ -40,8 +40,13 @@ public class ProductController {
 
     @GetMapping("/getByModel")
     private List<ProductEntity> getByModel(@RequestParam String model){
-        return this.iProduct.find(model);
+        return this.iProduct.findByModel(model);
     }
+
+//    @GetMapping("/orderByDate")
+//    private List<ProductEntity> orderByDate(){
+//
+//    }
 
 
 
