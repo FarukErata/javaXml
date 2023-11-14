@@ -1,18 +1,21 @@
 package com.example.xml.model;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
+@DynamicUpdate//Saves only the changed fields(update)
 @Table(name="Xml")
 public class ProductEntity {
-
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)//id will come from xml files
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
     @Column(name="ad")
     private String name;
@@ -20,23 +23,27 @@ public class ProductEntity {
     private String model;
     @Column(name="type")
     private String type;
-    @Column(name="fiyat")
-    private String price;
-    @Column(name="tarih")
-    private String date;
+//    @Column(name="fiyat")
+//    private String price;
+//    @Column(name="tarih")
+//    private String date;
+
+
+//    @OneToMany(mappedBy="product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    private List<DatePrice> datePrice;
 
     public ProductEntity() {
 
     }
 
 
-    public ProductEntity(int id,String name, String model, String type, String price, String date) {
+    public ProductEntity(int id,String name, String model, String type) {
         this.id=id;
         this.name = name;
         this.model = model;
         this.type = type;
-        this.price = price;
-        this.date = date;
+//        this.price = price;
+//        this.date = date;
     }
 
 
@@ -48,8 +55,6 @@ public class ProductEntity {
                 ", name='" + name + '\'' +
                 ", model='" + model + '\'' +
                 ", type='" + type + '\'' +
-                ", price='" + price + '\'' +
-                ", date='" + date + '\'' +
                 '}';
     }
 }

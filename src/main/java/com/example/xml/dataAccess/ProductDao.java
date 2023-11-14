@@ -10,5 +10,4 @@ import java.util.List;
 public interface ProductDao extends JpaRepository<ProductEntity,Integer> {
     List<ProductEntity> findByName(String name);
     List<ProductEntity> findByModel(String model);
-
 }
