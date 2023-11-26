@@ -1,12 +1,15 @@
 package com.example.xml.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -23,14 +26,14 @@ public class ProductEntity {
     private String model;
     @Column(name="type")
     private String type;
-//    @Column(name="fiyat")
-//    private String price;
-//    @Column(name="tarih")
-//    private String date;
 
 
-//    @OneToMany(mappedBy="product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-//    private List<DatePrice> datePrice;
+
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<DatePrice> datePriceSet;
+
 
     public ProductEntity() {
 

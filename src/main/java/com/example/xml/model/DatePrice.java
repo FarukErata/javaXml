@@ -16,22 +16,22 @@ public class DatePrice {
     private String date;
     @Column(name = "fiyat")
     private String price;
-    @Column(name="xmlid")
-    private int xmlid;
 
 
-//    @ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
-//    @JoinColumn(name="foreignid",referencedColumnName = "id")//foreignid,id
-//    private ProductEntity product;
+
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name="product_id",nullable = false)
+    private ProductEntity product;
 
     public DatePrice() {
 
     }
 
-    public DatePrice(int priceId, String date, String price) {
+    public DatePrice(int priceId, String date, String price,ProductEntity product) {
         this.priceId = priceId;
         this.date = date;
         this.price = price;
+        this.product=product;
     }
 
     @Override
