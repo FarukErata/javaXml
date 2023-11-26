@@ -3,9 +3,12 @@ package com.example.xml.business.concretes;
 import com.example.xml.business.abstracts.IProduct;
 import com.example.xml.dataAccess.DatePriceDao;
 import com.example.xml.dataAccess.ProductDao;
+import com.example.xml.dataAccess.UnionDao;
 import com.example.xml.model.DatePrice;
+import com.example.xml.model.ProductDto;
 import com.example.xml.model.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -36,10 +39,11 @@ public class ProductManager implements IProduct {
     String dateInString=new SimpleDateFormat(pattern).format(new Date());
 
     @Autowired
-    public ProductManager(ProductDao productDao,DatePriceDao datePriceDao){
+    public ProductManager(ProductDao productDao, DatePriceDao datePriceDao){
         super();
         this.productDao= productDao;
         this.datePriceDao= datePriceDao;
+
     }
 
     @Override
@@ -82,14 +86,12 @@ public class ProductManager implements IProduct {
 
                 }
 
-                dp.setDate(dateInString);
+               dp.setDate(dateInString);
 
                 productDao.save(entity);
-//                dp.setDate(entity.getDate());
-//                dp.setPrice(entity.getPrice());
-
-                dp.setXmlid(entity.getId());//temporary solution
+                dp.setProduct(entity);
                 datePriceDao.save(dp);
+
             }
         }catch(Exception e){
             System.out.println(e);

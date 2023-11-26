@@ -1,6 +1,7 @@
 package com.example.xml.business.abstracts;
 
 import com.example.xml.model.DatePrice;
+import com.example.xml.model.ProductDto;
 import com.example.xml.model.ProductEntity;
 
 import java.util.List;

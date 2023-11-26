@@ -3,6 +3,7 @@ package com.example.xml.api.controllers;
 import com.example.xml.business.abstracts.IProduct;
 import com.example.xml.business.concretes.ProductManager;
 import com.example.xml.model.DatePrice;
+import com.example.xml.model.ProductDto;
 import com.example.xml.model.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
