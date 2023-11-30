@@ -1,5 +1,6 @@
 package com.example.xml.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@DynamicUpdate//Saves only the changed fields(update)
+//@DynamicUpdate//Saves only the changed fields(update)
 @Table(name="Xml")
 public class ProductEntity {
     //@GeneratedValue(strategy = GenerationType.IDENTITY)//id will come from xml files
@@ -32,6 +33,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @JsonIgnore
     private Set<DatePrice> datePriceSet;
 
 

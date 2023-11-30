@@ -10,5 +10,5 @@ public interface IProduct {
     void read();
     List<ProductEntity> findByName(String name);
     List<ProductEntity> findByModel(String model);
-    List<DatePrice> orderByPrice(String date);
+    List<ProductDto> orderByPrice(String date);
 }

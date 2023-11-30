@@ -35,15 +35,17 @@ public class ProductManager implements IProduct {
     private ProductDao productDao;
     @Autowired
     private DatePriceDao datePriceDao;
+    @Autowired
+    private UnionDao unionDao;
     private String pattern="dd-MM-yyyy";
     String dateInString=new SimpleDateFormat(pattern).format(new Date());
 
     @Autowired
-    public ProductManager(ProductDao productDao, DatePriceDao datePriceDao){
+    public ProductManager(ProductDao productDao, DatePriceDao datePriceDao,UnionDao unionDao){
         super();
         this.productDao= productDao;
         this.datePriceDao= datePriceDao;
-
+        this.unionDao=unionDao;
     }
 
     @Override
@@ -109,8 +111,8 @@ public class ProductManager implements IProduct {
     }
 
     @Override
-    public List<DatePrice> orderByPrice(String date){
-        return datePriceDao.findByDate(date);
+    public List<ProductDto> orderByPrice(String date){
+        return unionDao.findByDate(date);
     }
 
 
